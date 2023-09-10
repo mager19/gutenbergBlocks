@@ -286,7 +286,7 @@ function Edit(props) {
     height: props.attributes.topHeight,
     width: props.attributes.topWidth,
     color: props.attributes.topColor
-  }), props.attributes.enableBottomCurve && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_curve__WEBPACK_IMPORTED_MODULE_6__.Curve, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks, null), props.attributes.enableBottomCurve && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_curve__WEBPACK_IMPORTED_MODULE_6__.Curve, {
     isBottom: true,
     flipX: (_props$attributes$bot = props.attributes.bottomFlipX) !== null && _props$attributes$bot !== void 0 ? _props$attributes$bot : false,
     flipY: (_props$attributes$bot2 = props.attributes.bottomFlipY) !== null && _props$attributes$bot2 !== void 0 ? _props$attributes$bot2 : false,
@@ -379,7 +379,16 @@ __webpack_require__.r(__webpack_exports__);
   /**
    * @see ./save.js
    */
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"],
+  transforms: {
+    from: [{
+      type: "block",
+      blocks: ['core/paragraph'],
+      transform: attributes => {
+        return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.createBlock)('blockylicious/curvy', {}, [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.createBlock)("core/paragraph", attributes)]);
+      }
+    }]
+  }
 });
 
 /***/ }),
@@ -394,11 +403,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ save; }
 /* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -417,9 +423,11 @@ __webpack_require__.r(__webpack_exports__);
  * @return {WPElement} Element to render.
  */
 function save() {
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
-  }, 'Curvy – hello from the saved content!');
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save();
+  const {
+    children
+  } = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useInnerBlocksProps.save(blockProps);
+  return children;
 }
 
 /***/ }),
@@ -504,7 +512,7 @@ module.exports = window["wp"]["i18n"];
   \*************************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blockylicious/curvy","version":"0.1.0","title":"Curvy","category":"widgets","icon":"smiley","description":"Curvy Shape dividers.","supports":{"html":false,"color":{"background":true,"text":true,"link":true},"spacing":{"padding":true}},"attributes":{"enableTopCurve":{"type":"boolean","default":true},"topWidth":{"type":"number","default":100},"topHeight":{"type":"number","default":100},"topFlipX":{"type":"boolean","default":true},"topFlipY":{"type":"boolean","default":true},"topColor":{"type":"string","default":"#fff"},"enablebottomCurve":{"type":"boolean","default":true},"bottomWidth":{"type":"number","default":100},"bottomHeight":{"type":"number","default":100},"bottomFlipX":{"type":"boolean","default":true},"bottomFlipY":{"type":"boolean","default":true},"bottomColor":{"type":"string","default":"#fff"},"style":{"type":"object","default":{"color":{"background":"#ec4899"},"spacing":{"padding":{"top":"80px","bottom":"80px","left":"50px","right":"50px"}}}}},"textdomain":"blockylicious","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blockylicious/curvy","version":"0.1.0","title":"Curvy","category":"blockylicious","icon":"smiley","description":"Curvy Shape dividers.","supports":{"html":false,"color":{"background":true,"text":true,"link":true},"spacing":{"padding":true}},"variations":[{"name":"top-only","title":"Curvy - Top Only","attributes":{"enableBottomCurve":false,"enableTopCurve":true}},{"name":"bottom-only","title":"Curvy - Bottom Only","attributes":{"enableBottomCurve":true,"enableTopCurve":false}}],"example":{"innerBlocks":[{"name":"core/heading","attributes":{"content":"Title"}},{"name":"core/paragraph","attributes":{"content":"This is an example curvy block"}}]},"attributes":{"enableTopCurve":{"type":"boolean","default":true},"topWidth":{"type":"number","default":100},"topHeight":{"type":"number","default":100},"topFlipX":{"type":"boolean","default":true},"topFlipY":{"type":"boolean","default":true},"topColor":{"type":"string","default":"#fff"},"enableBottomCurve":{"type":"boolean","default":true},"bottomWidth":{"type":"number","default":100},"bottomHeight":{"type":"number","default":100},"bottomFlipX":{"type":"boolean","default":true},"bottomFlipY":{"type":"boolean","default":true},"bottomColor":{"type":"string","default":"#fff"},"style":{"type":"object","default":{"color":{"background":"#ec4899"},"spacing":{"padding":{"top":"90px","bottom":"90px","left":"50px","right":"50px"}}}}},"textdomain":"blockylicious","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ })
 
