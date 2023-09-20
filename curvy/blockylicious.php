@@ -23,19 +23,47 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 
-function create_custom_block_category($categories)
-{
-	array_unshift($categories, [
-		"slug" => "blockylicious",
-		"title" => "Blockyliciuos",
-	]);
-	return $categories;
+namespace MagerDev;
+
+if (!defined('ABSPATH')) {
+	die('Silence is golden.');
 }
 
-
-function create_block_blockylicious_block_init()
+final class Blockylicious
 {
-	add_filter('block_categories_all', 'create_custom_block_category');
-	register_block_type(__DIR__ . '/build/blocks/curvy');
+	static function init()
+	{
+		add_action('init', function () {
+			add_filter('block_categories_all', function ($categories) {
+				array_unshift($categories, [
+					"slug" => "blockylicious",
+					"title" => "Blockyliciuos",
+				]);
+				return $categories;
+			});
+
+			register_block_type(__DIR__ . '/build/blocks/curvy');
+			register_block_type(__DIR__ . '/build/blocks/clickyGroup');
+			register_block_type(__DIR__ . '/build/blocks/clickyButton');
+		});
+	}
+	static function convert_custom_properties($value)
+	{
+		$prefix     = 'var:';
+		$prefix_len = strlen($prefix);
+		$token_in   = '|';
+		$token_out  = '--';
+		if (str_starts_with($value, $prefix)) {
+			$unwrapped_name = str_replace(
+				$token_in,
+				$token_out,
+				substr($value, $prefix_len)
+			);
+			$value          = "var(--wp--$unwrapped_name)";
+		}
+
+		return $value;
+	}
 }
-add_action('init', 'create_block_blockylicious_block_init');
+
+Blockylicious::init();
