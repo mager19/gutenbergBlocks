@@ -1,0 +1,38 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/piccyGallery/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+.wp-block-blockylicious-piccy-gallery .image-preview {
+  width: 100%;
+}
+.wp-block-blockylicious-piccy-gallery .gallery-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.wp-block-blockylicious-piccy-gallery .thumb {
+  border: 5px solid transparent;
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  filter: brightness(0.5);
+  height: 75px;
+  margin-bottom: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  transition: 0.2s ease all;
+  transform: scale(1);
+  width: 100%;
+}
+.wp-block-blockylicious-piccy-gallery .thumb:hover {
+  filter: brightness(1);
+}
+.wp-block-blockylicious-piccy-gallery .thumb.selected {
+  border: 5px solid #006dff;
+  filter: brightness(1);
+  transform: scale(1.1);
+}
+
+/*# sourceMappingURL=style-index.css.map*/
